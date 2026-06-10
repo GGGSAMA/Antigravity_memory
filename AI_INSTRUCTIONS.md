@@ -67,6 +67,19 @@
   - **全局唯一判定标准**：所有实体控制器 (`camera_comp`, `flight_comp`, `movement_comp`) 必须且只能通过判定 `Input.mouse_mode != Input.MOUSE_MODE_CAPTURED` 来决定是否阻断游戏输入操作。
 
 # ==============================================================================
+## 🌐 天机因果网与悬案系统 (Karma Graph & Crime Scene Tracing V1.0)
+- **全局图计算架构 (Karma Manager)**：
+  - 关系不存储在 NPC 单体上，而是维护在全局单例的图数据库（Graph）中。
+  - **泛用节点**：实体（Entity）可以是玩家、NPC，也可以是宗门势力。
+- **暗杀与天机掩盖 (Crime Scene & Cold Case)**：
+  - 击杀行为**绝对不直接**产生好感度变动或仇恨红线。
+  - 击杀会在原地生成“斗法遗迹/案发现场 (Crime Scene)”。
+  - 宗门长辈/命牌阵法会以案发地为圆心，向外扩散神识追查半径（Tracking Radius）。如果凶手（玩家）在被扫描到之前逃出圈外，该事件彻底成为**无头悬案**，不触发寻仇。
+- **沉浸式战斗代价 (Combat Consequences)**：
+  - 受伤导致移速/冲刺受损，灵力枯竭导致无法御剑。
+  - 强迫玩家在战斗前后必须计算“逃亡成本”，大幅提升大世界修仙的残酷感与真实感。
+
+# ==============================================================================
 # END OF SYSTEM DIRECTIVE.
 # INITIALIZATION COMPLETE. 
 # PLEASE ACKNOWLEDGE RECEIPT IN YOUR FIRST RESPONSE TO THE USER.
