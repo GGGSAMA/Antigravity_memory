@@ -37,6 +37,36 @@
   - 空手状态下：双手独立施法（左侧法术与右侧法术互不干扰）。
 
 # ==============================================================================
+## 🏃 Player Controller V1.0 (Movement & Flight Mechanics)
+- **地面移动 (Source/CSGO 物理复刻)**：
+  - 具备真实的地面起步加速度与滑动摩擦力（Ground Acceleration & Friction）。
+  - 支持完美保留动量的空中连跳与变向（Air Strafing），杜绝生硬的半空刹车。
+  - 按 Ctrl 丝滑下蹲（视距与移速减半）。
+- **修仙御空飞行 (Flight Mechanics V1.1)**：
+  - **起飞与加速 (Space)**：长按空格起飞，起飞后按住空格相当于踩油门，提升巡航档位，角色自动沿镜头正前方疾驰。
+  - **减速降档 (S键)**：按住 S 键平滑减速降档，不影响前进方向。
+  - **动态鼠标视角 (仙人重力感)**：飞行时鼠标灵敏度自动衰减 50%，左右滑动鼠标会产生类似滑翔伞的镜头物理侧倾（Camera Bank/Roll），平滑且厚重。
+  - **氮气冲刺 (Shift)**：按住 Shift 爆发氮气，速度飙升 2.5 倍，FOV与视距随档位平滑拉远拉近。
+  - **降落与刹车 (Alt)**：
+    - 短按：清空档位，触发极致的悬空急停（硬刹车）。
+    - 长按（>0.3秒）：极速坠落！无视速度上限砸向地面。底层采用了**射线检测（手动 CCD）**完美解决了极速穿透地皮的问题，且在精准吸附地面的那一帧，会触发巨大的动态空气冲击波特效（TorusMesh）。
+- **第三人称模型 (Sophia Skin 动态替换)**：
+  - 摒弃胶囊体。系统在 Runtime 会自动清理 `PlayerModel` 下的旧 Mesh，并挂载 `res://models/characters/gdquest_sophia/sophia_skin.tscn`（已自动旋转 180 度面朝前方）。
+  - `AnimationComponent` 独立监控主角 Velocity 等状态，无缝驱动其 `AnimationTree`（包含 Idle, Move, Jump, Fall 滞空等第三人称全身动画）。
+
+
+# ==============================================================================
+## 🖥️ UI Architecture V1.0 (Dashboard & Context Menus)
+- **大一统全屏面板 (DashboardUI)**：
+  - 采用 PUBG/塔科夫 类似的全局 Tab 页签模式。按 `TAB` 键统一切换。
+  - **包裹与法宝**：继承了传统的装备拖拽槽位与 50 格背包逻辑。
+  - **修真境界 (Stats)**：纯代码动态生成的属性面板（境界、气血、真元、神识）。
+  - **神通功法 (Skills)**：纯代码生成的功法挂载槽位。
+- **UI 焦点防劫持设计**：
+  - 绝对禁止使用面板的 `.visible` 属性来判定是否锁死角色输入（因为 TabContainer 会强制活动页签为 visible）。
+  - **全局唯一判定标准**：所有实体控制器 (`camera_comp`, `flight_comp`, `movement_comp`) 必须且只能通过判定 `Input.mouse_mode != Input.MOUSE_MODE_CAPTURED` 来决定是否阻断游戏输入操作。
+
+# ==============================================================================
 # END OF SYSTEM DIRECTIVE.
 # INITIALIZATION COMPLETE. 
 # PLEASE ACKNOWLEDGE RECEIPT IN YOUR FIRST RESPONSE TO THE USER.
