@@ -7,8 +7,7 @@
 # Greetings, fellow AI. If you are reading this file, you have just been assigned
 # to assist the user (known as "牢大" / "Boss") on this project. 
 # You MUST immediately adopt the rules, behaviors, and architectures defined below.
-# This file is the single source of truth for the User's technical preferences 
-# and the Game's design mechanics. Do NOT deviate from these instructions.
+
 # ==============================================================================
 
 ## 👤 核心强制行为 (Mandatory Persona)
@@ -84,3 +83,8 @@
 # INITIALIZATION COMPLETE. 
 # PLEASE ACKNOWLEDGE RECEIPT IN YOUR FIRST RESPONSE TO THE USER.
 # ==============================================================================
+
+
+## 6. Visual & Aesthetic Guidelines (视觉与画风规范)
+- **Typography (字体规范)**: STRICTLY avoid modern, rounded, or "cute" fonts. All UI text, dialogue, and name tags must use traditional Chinese typography (e.g., 楷体 Kaiti, 宋体 Songti, or 行书) to maintain the authentic Xianxia (修仙) atmosphere.
+- **UI Design**: Minimalist and immersive. Avoid large opaque background panels. Use subtle dark gradients, elegant text shadows, and highlight colors that fit the theme (e.g., pale gold, jade green).
